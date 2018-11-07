@@ -10,6 +10,8 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
+import Plus from './Plus';
+
 export default class App extends Component{
   render() {
     return (
@@ -54,73 +56,23 @@ export default class App extends Component{
 
         <View style={styles.menu}>
           <View style={styles.menu_row}>
-                <View style={styles.menu_item}>
-                  <View style={styles.menu_icon}> 
-                    <Icon name="text" size={20} color={'green'} />
-                  </View>
-                    <View style={styles.menu_item_layout}>
-                      <Text style={styles.menu_text}>All</Text>
-                      <Text style={styles.menu_text}>Schedule</Text>
-                      <Text style={[styles.menu_text,{color:'lightgrey',fontSize:10}]}>57 Tasks</Text>
-                    </View>
-                  
-                </View>
-                <View style={styles.menu_item}>
-                  <View style={styles.menu_icon}> 
-                    <Icon name="user" size={20} color={'green'} />
-                  </View>
-                  <View style={styles.menu_item_layout}>
-                      <Text style={styles.menu_text}>Personal</Text>
-                      <Text style={styles.menu_text}>Errands</Text>
-                      <Text style={[styles.menu_text,{color:'lightgrey',fontSize:10}]}>45 Tasks</Text>
-                    </View>
-                </View>
+              <MenuItem icon_name={"text"} name1={"All"} name2={"Schedule"} no_of_tasks={57} /> 
+               <MenuItem icon_name={"user"} name1={"Personal"} name2={"Errands"} no_of_tasks={45} /> 
+                
           </View>
 
            <View style={styles.menu_row}>
-                <View style={styles.menu_item}>
-                  <View style={styles.menu_icon}> 
-                    <Icon name="briefcase" size={20} color={'green'} />
-                  </View>
-                  <View style={styles.menu_item_layout}>
-                      <Text style={styles.menu_text}>Work</Text>
-                      <Text style={styles.menu_text}>Projects</Text>
-                      <Text style={[styles.menu_text,{color:'lightgrey',fontSize:10}]}>12 Tasks</Text>
-                    </View>
-                  
-                </View>
-                <View style={styles.menu_item}>
-                  <View style={styles.menu_icon}> 
-                    <Icon name="shopping-basket" size={20} color={'green'} />
-                  </View>     
-                  <View style={styles.menu_item_layout}>
-                      <Text style={styles.menu_text}>Grocery</Text>
-                      <Text style={styles.menu_text}>List</Text>
-                      <Text style={[styles.menu_text,{color:'lightgrey',fontSize:10}]}>7 Tasks</Text>
-                    </View>             
-                  
-                </View>
+
+              <MenuItem icon_name={"briefcase"} name1={"Work"} name2={"Projects"} no_of_tasks={12} /> 
+               <MenuItem icon_name={"shopping-basket"} name1={"Grocery"} name2={"List"} no_of_tasks={7} /> 
+               
           </View>
 
           <View style={styles.menu_row}>
+              <MenuItem icon_name={"book"} name1={"College"} name2={""} no_of_tasks={34} /> 
+               
                 <View style={styles.menu_item}>
-                  <View style={styles.menu_icon}> 
-                    <Icon name="book" size={20} color={'green'} />
-                  </View>
-                  <View style={styles.menu_item_layout}>
-                      <Text style={styles.menu_text}>School</Text>
-                      
-                      <Text style={[styles.menu_text,{color:'lightgrey',fontSize:10}]}>57 Tasks</Text>
-                    </View>
-                </View>
-
-                <View style={styles.menu_item}>
-                    <View style={styles.add_btn}>
-                        <View style={styles.plus}>
-                          <Icon name="plus" size={25} color={"white"} />
-                        </View>
-                    </View>
-                  
+                    <Plus />                  
                 </View>
 
                 
@@ -133,6 +85,30 @@ export default class App extends Component{
     );
   }
 }
+
+
+class MenuItem extends Component{
+  render(){
+    return( 
+      <View style={styles.menu_item}>
+                  <View style={styles.menu_icon}> 
+                    <Icon name={this.props.icon_name} size={20} color={'green'} />
+                  </View>
+                    <View style={styles.menu_item_layout}>
+                      <Text style={styles.menu_text}>{this.props.name1}</Text>
+                      {
+                        this.props.name2!="" && <Text style={styles.menu_text}>{this.props.name2}</Text>
+                      }
+                      
+                      <Text style={[styles.menu_text,styles.menu_task]}>{this.props.no_of_tasks} Tasks</Text>
+                    </View>
+                  
+          </View>
+
+    );
+  }
+}
+
 
 
 
@@ -252,6 +228,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     
   },
+  menu_task:{
+    color:'lightgrey',
+    fontSize:10
+  },
   text_margin:{
       marginTop: '5%', 
   },
@@ -268,20 +248,5 @@ const styles = StyleSheet.create({
     marginLeft: '20%',
     
   },
-  add_btn:{
-    flex:1,
-    alignSelf: 'baseline',
-    marginTop: '40%',
-    marginLeft: '70%',
-    marginBottom: '0%',
-    backgroundColor: '#ff1493',
-    borderTopLeftRadius: 30,
-    height: '60%',
-    width:'20%',
-  },
-  plus:{
-    color:'pink',
-    marginLeft: '30%',
-    marginTop:'20%',
-  }
+  
 });
